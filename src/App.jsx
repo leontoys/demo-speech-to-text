@@ -1,34 +1,70 @@
 import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
 import './App.css'
+import { HfInference } from "@huggingface/inference";
 
 function App() {
-  const [count, setCount] = useState(0)
+
+  const [filePath,setFilePath] = useState("")
+
+  const handleFileChange = (e)=>{
+    setFilePath(e.target.files[0])
+  }
+
+  const fileLoaded = async (e)=>{
+
+    console.log("file-loaded")
+
+    const result = e.target.result
+
+    console.log("result",result)
+
+    const hf_key = import.meta.env.VITE_HF
+
+    const client = new HfInference(hf_key); 
+  
+    //convert array buffer to blog
+    const data = new Blob([result])
+
+    console.log("blob",data)
+
+    
+    try {
+
+      const output = await client.automaticSpeechRecognition({
+        data,
+        model: "openai/whisper-large-v3",
+        provider: "fal-ai",
+      });     
+
+    console.log(output);
+
+      
+    } catch (error) {
+
+      console.error("Error",error)
+      
+    }
+    
+
+  }
+
+  const handleFileUpload = async (e)=>{
+    
+    const reader = new FileReader()
+
+    reader.addEventListener("load",fileLoaded)
+
+    reader.readAsArrayBuffer(filePath)
+
+    console.log("waiting")
+    
+  }
 
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
+    <div className='App'>
+      <input type='file' onChange={handleFileChange}></input>
+      <button type='submit' onClick={handleFileUpload}>Upload</button>
+    </div>
   )
 }
 
