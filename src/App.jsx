@@ -46,15 +46,57 @@ function App() {
 
   }
 
+  const fileFetch = async(e)=>{
+
+    const result = e.target.result
+
+    const hf_key = import.meta.env.VITE_HF
+  
+    //convert array buffer to blog
+    const data = new Blob([result],{ type: "audio/wav" })
+
+    const endpoint =
+    import.meta.env.MODE === 'development'
+      ? "/api/hf-inference/models/openai/whisper-large-v3-turbo"
+      : "https://router.huggingface.co/hf-inference/models/openai/whisper-large-v3-turbo"       
+    
+    try {
+      
+      const response = await fetch(
+        endpoint,
+        {
+          headers: {
+            Authorization: `Bearer ${hf_key}`,
+            "Content-Type": "application/json",
+          },
+          method: "POST",
+          body: data,
+        }
+      );
+      
+      const transcript = await response.json();  
+
+      console.log("transcript",transcript,typeof transcript,transcript["text"])
+
+      setText(transcript.text)
+
+
+    } catch (error) {
+      console.error(error)
+    }
+
+  }
+
   const handleFileUpload = async (e)=>{
     
     const reader = new FileReader()
 
-    reader.addEventListener("load",fileLoaded)
+    reader.addEventListener("load",fileFetch)
 
     reader.readAsArrayBuffer(filePath)
     
   }
+  
 
   return (
     <div className='App'>
