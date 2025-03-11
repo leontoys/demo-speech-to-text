@@ -26,7 +26,7 @@ function App() {
 
       const output = await client.automaticSpeechRecognition({
         data,
-        model: "openai/whisper-large-v3-turbo",
+        model: "openai/whisper-large-v3",
         provider: "hf-inference",
       });     
 
@@ -58,9 +58,10 @@ function App() {
 
   return (
     <div className='App'>
+      <h1>Speech to Text</h1>
       <input type='file' onChange={handleFileChange}></input>
       <button type='submit' onClick={handleFileUpload}>Upload</button>
-      <textarea value={text}></textarea>
+      <textarea value={text} placeholder='Transcribed text will appear here...'></textarea>
     </div>
   )
 }
