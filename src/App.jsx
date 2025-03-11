@@ -60,7 +60,7 @@ function App() {
     <div className='App'>
       <h1>Speech to Text</h1>
       <input type='file' onChange={handleFileChange}></input>
-      <button type='submit' onClick={handleFileUpload}>Upload</button>
+      <button type='submit' onClick={handleFileUpload}>Transcribe</button>
       <textarea value={text} placeholder='Transcribed text will appear here...'></textarea>
     </div>
   )
