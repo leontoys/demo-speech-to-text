@@ -5,6 +5,7 @@ import { HfInference } from "@huggingface/inference";
 function App() {
 
   const [filePath,setFilePath] = useState("")
+  const [text,setText] = useState("")
 
   const handleFileChange = (e)=>{
     setFilePath(e.target.files[0])
@@ -12,32 +13,29 @@ function App() {
 
   const fileLoaded = async (e)=>{
 
-    console.log("file-loaded")
-
     const result = e.target.result
-
-    console.log("result",result)
 
     const hf_key = import.meta.env.VITE_HF
 
     const client = new HfInference(hf_key); 
   
     //convert array buffer to blog
-    const data = new Blob([result])
-
-    console.log("blob",data)
-
+    const data = new Blob([result],{ type: "audio/wav" })
     
     try {
 
       const output = await client.automaticSpeechRecognition({
         data,
-        model: "openai/whisper-large-v3",
-        provider: "fal-ai",
+        model: "openai/whisper-large-v3-turbo",
+        provider: "hf-inference",
       });     
 
-    console.log(output);
-
+      if(output){
+        setText(output.text)
+      }
+      else{
+        setText("Not able to transcribe at the moment.Please try later")
+      }
       
     } catch (error) {
 
@@ -55,8 +53,6 @@ function App() {
     reader.addEventListener("load",fileLoaded)
 
     reader.readAsArrayBuffer(filePath)
-
-    console.log("waiting")
     
   }
 
@@ -64,6 +60,7 @@ function App() {
     <div className='App'>
       <input type='file' onChange={handleFileChange}></input>
       <button type='submit' onClick={handleFileUpload}>Upload</button>
+      <textarea value={text}></textarea>
     </div>
   )
 }
