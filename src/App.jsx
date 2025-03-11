@@ -8,6 +8,7 @@ function App() {
   const [text,setText] = useState("")
 
   const handleFileChange = (e)=>{
+    console.log("filepath",e.target.files[0])
     setFilePath(e.target.files[0])
   }
 
@@ -49,16 +50,20 @@ function App() {
   const fileFetch = async(e)=>{
 
     const result = e.target.result
+    console.log("result",result)
 
     const hf_key = import.meta.env.VITE_HF
   
     //convert array buffer to blog
     const data = new Blob([result],{ type: "audio/wav" })
+    console.log("audio-data",data)
 
     const endpoint =
     import.meta.env.MODE === 'development'
       ? "/api/hf-inference/models/openai/whisper-large-v3-turbo"
-      : "https://router.huggingface.co/hf-inference/models/openai/whisper-large-v3-turbo"       
+      : "https://router.huggingface.co/hf-inference/models/openai/whisper-large-v3-turbo"    
+      
+    console.log("endpoint",endpoint)
     
     try {
       
@@ -73,10 +78,12 @@ function App() {
           body: data,
         }
       );
+
+      console.log("response",response)
       
       const transcript = await response.json();  
 
-      console.log("transcript",transcript,typeof transcript,transcript["text"])
+      console.log("transcript",transcript)
 
       setText(transcript.text)
 
