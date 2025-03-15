@@ -1,12 +1,26 @@
-# React + Vite
+# 🗣️ Demo Speech to Text
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A web application that allows users to convert **speech to text** in real-time. The app listens to the audio uploaded, processes the speech, and transcribes it into text using a speech recognition API.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 🚀 Features
 
-## Expanding the ESLint configuration
+- 🎙️ Real-time speech-to-text conversion.
+- 📝 Displays the transcribed text instantly.
+- 🧑‍💻 Simple and intuitive interface for easy use.
+- 🔄 Works directly in the browser with no server-side processing required.
 
-If you are developing a production application, we recommend using TypeScript and enable type-aware lint rules. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+---
+
+## 🛠 Tech Stack
+
+- React
+- JavaScript (ES6+)
+- Web Speech API (for Speech Recognition)
+
+---
+
+## 🌐 Live Demo
+
+🔗 [Speech to Text](https://demo-speech-to-text.vercel.app/)

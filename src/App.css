@@ -7,7 +7,6 @@
 body{
     max-width: 800px;
     background-color: skyblue;
-    font-size: 2rem;
 }
 
 .App{
@@ -26,6 +25,6 @@ h1{
 }
 
 textarea{
-    height: 20vh;
+    height: 80vh;
     width: 100vh;
 }

@@ -49,14 +49,16 @@ function App() {
 
   const fileFetch = async(e)=>{
 
-    const result = e.target.result
+    const result = filePath
     console.log("result",result)
 
     const hf_key = import.meta.env.VITE_HF
   
     //convert array buffer to blog
-    const data = new Blob([result],{ type: "audio/wav" })
+    let data = new Blob([result],{ type: result.type })
     console.log("audio-data",data)
+
+    data = data.slice(0,2000000)
 
     const endpoint =
     import.meta.env.MODE === 'development'
