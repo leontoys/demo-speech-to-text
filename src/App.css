@@ -64,3 +64,16 @@ textarea {
     font-size: 1rem;
     line-height: 1.5;
 }
+
+.file-name {
+    font-size: 0.9rem;
+    color: #e2e8f0;
+    background-color: #1e293b;
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+}
+
+.loading {
+    color: #94a3b8;
+    font-weight: bold;
+}
