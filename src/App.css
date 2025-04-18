@@ -1,30 +1,66 @@
-*{
+* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
-body{
-    max-width: 800px;
-    background-color: skyblue;
+body {
+    background-color: #0f172a;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
 }
 
-.App{
-    margin: 10px auto;
+.App {
+    background-color: white;
+    padding: 2rem;
+    border-radius: 16px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    max-width: 600px;
+    width: 100%;
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    align-items: flex-start;
-    padding: 10px;
-    max-width: 800px;
-    gap : 10px;
+    gap: 1rem;
 }
 
-h1{
-    color: blue;
+h1 {
+    color: #0044cc;
+    font-size: 2rem;
+    text-align: center;
 }
 
-textarea{
-    height: 80vh;
-    width: 100vh;
+input[type="file"] {
+    padding: 0.5rem;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background-color: #f8f8f8;
+    cursor: pointer;
+}
+
+button {
+    padding: 0.75rem 1.5rem;
+    background-color: #0044cc;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.2s ease-in-out;
+}
+
+button:hover {
+    background-color: #0033aa;
+}
+
+textarea {
+    width: 100%;
+    height: 300px;
+    padding: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    resize: vertical;
+    font-size: 1rem;
+    line-height: 1.5;
 }
