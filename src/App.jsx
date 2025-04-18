@@ -12,6 +12,7 @@ function App() {
   const handleFileChange = (e) => {
     console.log("filepath", e.target.files[0])
     setFilePath(e.target.files[0])
+    setText(""); // Clear previous transcription    
   }
 
   const fileLoaded = async (e) => {
@@ -60,7 +61,13 @@ function App() {
       <h1>Speech to Text</h1>
       <input type='file' accept='audio/*' onChange={handleFileChange} />
       {filePath && <p className="file-name">Selected file: {filePath.name}</p>}
-      <button type='submit' onClick={handleFileUpload}>Transcribe</button>
+      <button
+        type='submit'
+        onClick={handleFileUpload}
+        disabled={loading || !filePath}
+      >
+        {loading ? "Transcribing..." : "Transcribe"}
+      </button>
       {loading && <p className="loading">Transcribing... please wait ⏳</p>}
       <textarea value={text} placeholder='Transcribed text will appear here...'></textarea>
     </div>
